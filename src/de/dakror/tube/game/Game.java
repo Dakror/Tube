@@ -6,6 +6,7 @@ import static org.lwjgl.util.glu.GLU.*;
 import org.lwjgl.opengl.Display;
 
 import de.dakror.tube.game.tube.Row;
+import de.dakror.tube.settings.CFG;
 import de.dakror.tube.util.math.MathHelper;
 
 /**
@@ -44,6 +45,7 @@ public class Game
 		
 		for (int i = 0; i < rows.length; i++)
 		{
+			CFG.p(i);
 			glPushMatrix();
 			rows[i].render();
 			glPopMatrix();
