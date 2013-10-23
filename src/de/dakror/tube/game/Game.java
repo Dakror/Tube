@@ -5,6 +5,7 @@ import static org.lwjgl.util.glu.GLU.*;
 
 import org.lwjgl.opengl.Display;
 
+import de.dakror.tube.game.tube.Row;
 import de.dakror.tube.util.math.MathHelper;
 
 /**
@@ -16,6 +17,13 @@ public class Game
 	public static final float zFar = 100f;
 	
 	public static Game currentGame;
+	Row[] rows = new Row[1];
+	
+	public Game()
+	{
+		rows[0] = new Row(50, 50);
+		
+	}
 	
 	public void gameLoop()
 	{
@@ -33,6 +41,15 @@ public class Game
 		
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		for (int i = 0; i < rows.length; i++)
+		{
+			glPushMatrix();
+			rows[i].render();
+			glPopMatrix();
+		}
+		
+		
 		
 		Display.update();
 		Display.sync(60);

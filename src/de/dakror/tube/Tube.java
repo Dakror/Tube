@@ -25,7 +25,7 @@ public class Tube
 			running = true;
 			setFullscreen();
 			// Display.setIcon(new ByteBuffer[] { Assistant.loadImage(Tube.class.getResourceAsStream("/graphics/logo/logo16.png")), Assistant.loadImage(Tube.class.getResourceAsStream("/graphics/logo/logo32.png")) });
-			Display.setTitle("Vloxlands");
+			Display.setTitle("Tube");
 			Display.setResizable(true);
 			try
 			{
