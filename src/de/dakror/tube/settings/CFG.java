@@ -1,4 +1,4 @@
-package de.dakror.tube.util;
+package de.dakror.tube.settings;
 
 import java.io.File;
 
