@@ -23,7 +23,9 @@ public class Row
 		glTranslatef(x, y, 0);
 		for (int i = 0; i < fields.length; i++)
 		{
+			glPushMatrix();
 			fields[i].render();
+			glPopMatrix();
 		}
 	}
 	
