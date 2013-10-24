@@ -31,7 +31,7 @@ public class Game
 	
 	public Game()
 	{
-		createTube(10);
+		createTube(12);
 	}
 	
 	public void createTube(int n)

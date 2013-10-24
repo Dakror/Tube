@@ -21,6 +21,7 @@ public class Field
 		glTranslatef(0, 0, pos);
 		glRotatef(90, 1, 0, 0);
 		glEnable(GL_TEXTURE_2D);
+		if (System.getProperty("os.version").equals("6.0")) glColor3f(1, 0, 0);
 		RenderAssistant.bindTexture("/img/field.png");
 		
 		float size = 0.85f;
