@@ -64,6 +64,8 @@ public class Game
 		glLoadIdentity();
 		
 		glRotatef(180, 1, 0, 0);
+//		glTranslatef(-0.5f, -0.1f, 0);
+//		glRotatef(camera.getRotation(), 0, 0, 1);
 		glTranslatef(-0.5f, -1f, -camera.getPosZ());
 		
 		FloatBuffer fogColor = BufferUtils.createFloatBuffer(4);

@@ -6,6 +6,7 @@ public class DriverCamera
 {
 	float posZ;
 	float rotation;
+	public static final float DEGREES = 2f;
 	public static final float SPEED = 0.2f;
 	
 	public DriverCamera()
@@ -17,14 +18,10 @@ public class DriverCamera
 	
 	public void update()
 	{
-		if (Keyboard.isKeyDown(Keyboard.KEY_W))
-		{
-			posZ += SPEED;
-		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_S))
-		{
-			posZ -= SPEED;
-		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_W)) posZ += SPEED;
+		if (Keyboard.isKeyDown(Keyboard.KEY_S)) posZ -= SPEED;
+		if (Keyboard.isKeyDown(Keyboard.KEY_A)) rotation -= DEGREES;
+		if (Keyboard.isKeyDown(Keyboard.KEY_D)) rotation += DEGREES;
 	}
 	
 	public float getPosZ()
