@@ -4,7 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Row
 {
-	Field[] fields = new Field[5];
+	Field[] fields = new Field[30];
 	float x;
 	float y;
 	

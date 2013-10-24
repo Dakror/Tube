@@ -3,7 +3,6 @@ package de.dakror.tube.game;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -59,26 +58,14 @@ public class Game
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		if (Mouse.isButtonDown(1))
-		{
-			// Game.currentGame.rotateCamera();
-			// Game.currentGame.moveCamera();
-			camera.update();
-		}
-		Mouse.setGrabbed(Mouse.isButtonDown(1));
+		camera.update();
 		
-		// Vector3f u = camera.getPosition();
-		// Vector3f v = MathHelper.getNormalizedRotationVector(camera.getRotation());
-		// Vector3f w = camera.getPosition().translate(v.x, v.y, v.z);
-		//
-		// gluLookAt(u.x, u.y, u.z, w.x, w.y, w.z, 0, 1, 0);
-		//
-		//
-		glTranslatef(0, 0, camera.getPosZ());
+		glRotatef(180, 1, 0, 0);
+		glTranslatef(-0.5f, -1f, -camera.getPosZ());
+		
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		// glTranslatef(Display.getWidth() / 2, Display.getHeight() / 2, 0);
 		for (int i = 0; i < rows.length; i++)
 		{
 			glPushMatrix();
@@ -89,48 +76,6 @@ public class Game
 		Display.update();
 		Display.sync(60);
 	}
-	
-	// public void rotateCamera()
-	// {
-	// if (!Mouse.isGrabbed()) Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
-	//
-	// float x = (Mouse.getY() - Display.getHeight() / 2) / (float) Display.getHeight() * cameraRotationSpeed;
-	// float y = (Mouse.getX() - Display.getWidth() / 2) / (float) Display.getWidth() * cameraRotationSpeed;
-	//
-	// if (Math.abs(camera.rotation.x - x) >= 90) x = 0;
-	//
-	// camera.rotate(-x, y, 0);
-	//
-	// Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
-	// }
-	//
-	// public void moveCamera()
-	// {
-	// if (Keyboard.isKeyDown(Keyboard.KEY_W))
-	// {
-	// camera.move((Vector3f) MathHelper.getNormalizedRotationVector(camera.getRotation()).scale(cameraSpeed));
-	// }
-	// if (Keyboard.isKeyDown(Keyboard.KEY_S))
-	// {
-	// camera.move((Vector3f) MathHelper.getNormalizedRotationVector(camera.getRotation()).scale(cameraSpeed).negate());
-	// }
-	// if (Keyboard.isKeyDown(Keyboard.KEY_D))
-	// {
-	// camera.move((Vector3f) getNormalizedRotationVectorForSidewardMovement(camera.getRotation().translate(0, 90, 0)).scale(cameraSpeed));
-	// }
-	// if (Keyboard.isKeyDown(Keyboard.KEY_A))
-	// {
-	// camera.move((Vector3f) getNormalizedRotationVectorForSidewardMovement(camera.getRotation().translate(0, -90, 0)).scale(cameraSpeed));
-	// }
-	// if (Keyboard.isKeyDown(Keyboard.KEY_Q))
-	// {
-	// camera.move(0, 0.5f, 0);
-	// }
-	// if (Keyboard.isKeyDown(Keyboard.KEY_E))
-	// {
-	// camera.move(0, -0.5f, 0);
-	// }
-	// }
 	
 	public static Vector3f getNormalizedRotationVectorForSidewardMovement(Vector3f v)
 	{
