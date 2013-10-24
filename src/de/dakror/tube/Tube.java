@@ -43,6 +43,8 @@ public class Tube
 				
 				Game.currentGame.gameLoop();
 			}
+			
+			running = false;
 		}
 		catch (Exception e)
 		{

@@ -6,7 +6,7 @@ public class DriverCamera
 {
 	float posZ;
 	float rotation;
-	public static final float SPEED = 0.05f;
+	public static final float SPEED = 0.2f;
 	
 	public DriverCamera()
 	{

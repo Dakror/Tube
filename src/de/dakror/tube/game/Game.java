@@ -3,6 +3,9 @@ package de.dakror.tube.game;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.util.glu.GLU.*;
 
+import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -16,7 +19,7 @@ import de.dakror.tube.util.DriverCamera;
 public class Game
 {
 	public static final float zNear = 0.1f;
-	public static final float zFar = 100f;
+	public static final float zFar = 50f;
 	
 	public static DriverCamera camera = new DriverCamera();
 	public static Game currentGame;
@@ -28,6 +31,8 @@ public class Game
 	
 	public Game()
 	{
+		new UpdateThread();
+		
 		createTube(12);
 	}
 	
@@ -58,10 +63,18 @@ public class Game
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 		
-		camera.update();
-		
 		glRotatef(180, 1, 0, 0);
 		glTranslatef(-0.5f, -1f, -camera.getPosZ());
+		
+		FloatBuffer fogColor = BufferUtils.createFloatBuffer(4);
+		fogColor.put(new float[] { 0, 0, 0, 1 }).flip();
+		glEnable(GL_FOG);
+		glFogi(GL_FOG_MODE, GL_LINEAR);
+		glFog(GL_FOG_COLOR, fogColor);
+		glFogf(GL_FOG_DENSITY, 1);
+		glHint(GL_FOG_HINT, GL_DONT_CARE);
+		glFogf(GL_FOG_START, zFar - 40);
+		glFogf(GL_FOG_END, zFar);
 		
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -115,6 +128,6 @@ public class Game
 		// glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 		// glMaterialf(GL_FRONT, GL_SHININESS, 1f);
 		//
-		// glEnable(GL_FOG);
+		glEnable(GL_FOG);
 	}
 }
