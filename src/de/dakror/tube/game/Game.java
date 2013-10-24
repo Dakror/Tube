@@ -144,7 +144,6 @@ public class Game
 	public static void init()
 	{
 		currentGame = new Game();
-		camera.setRotation(0, -180, 0);
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
