@@ -2,6 +2,8 @@ package de.dakror.tube.util;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import de.dakror.tube.game.Game;
+
 public class Camera
 {
 	public Vector3f position = new Vector3f();
@@ -37,12 +39,12 @@ public class Camera
 		rotation = new Vector3f(x, y, z);
 	}
 	
-	// public void move(float x, float y, float z)
-	// {
-	// float speed = Game.currentGame.cameraSpeed;
-	// position.translate(x * speed, y * speed, z * speed);
-	// }
-	//
+	public void move(float x, float y, float z)
+	{
+		float speed = Game.currentGame.cameraSpeed;
+		position.translate(x * speed, y * speed, z * speed);
+	}
+	
 	public void move(double d, double y, double e)
 	{
 		this.move((float) d, (float) y, (float) e);

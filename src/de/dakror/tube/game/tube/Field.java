@@ -1,9 +1,12 @@
 package de.dakror.tube.game.tube;
 
 import static org.lwjgl.opengl.GL11.*;
+import de.dakror.tube.util.RenderAssistant;
 
 public class Field
 {
+	public static final float SIZE = 1;
+	
 	int pos;
 	boolean block;
 	
@@ -16,12 +19,12 @@ public class Field
 	public void render()
 	{
 		glTranslatef(0, 0, pos);
-		glColor3f(1, 0, 0);
-		glBegin(GL_QUADS);
-		glVertex3f(1, 0, 1);
-		glVertex3f(0, 0, 1);
-		glVertex3f(0, 0, 0);
-		glVertex3f(1, 0, 0);
-		glEnd();
+		glRotatef(90, 1, 0, 0);
+		glEnable(GL_TEXTURE_2D);
+		RenderAssistant.bindTexture("/img/field.png");
+		
+		float size = 0.85f;
+		
+		RenderAssistant.renderRect(0, 0, 1, 1, 0, 0, size, size);
 	}
 }
