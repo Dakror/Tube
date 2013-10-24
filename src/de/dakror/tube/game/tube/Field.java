@@ -20,12 +20,30 @@ public class Field
 	{
 		glTranslatef(0, 0, pos);
 		glRotatef(90, 1, 0, 0);
-		glEnable(GL_TEXTURE_2D);
-		if (System.getProperty("os.version").equals("6.0")) glColor3f(1, 0, 0);
-		RenderAssistant.bindTexture("/img/field.png");
-		
 		float size = 0.85f;
 		
-		RenderAssistant.renderRect(0, 0, 1, 1, 0, 0, size, size);
+		if (System.getProperty("os.version").equals("6.0")) // vista fix
+		{
+			glLineWidth(5f);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glColor3f(0, 0, 0);
+			
+			RenderAssistant.renderRect(0, 0, 1, 1, 0, 0, size, size);
+			glLineWidth(1f);
+			
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			
+			glColor3f(1, 1, 1);
+			RenderAssistant.renderRect(0.01f, 0.01f, 0.98f, 0.98f, 0, 0, size, size);
+		}
+		else
+		{
+			glEnable(GL_TEXTURE_2D);
+			RenderAssistant.bindTexture("/img/field.png");
+			
+			glColor3f(1, 1, 1);
+			RenderAssistant.renderRect(0, 0, 1, 1, 0, 0, size, size);
+		}
+		
 	}
 }
