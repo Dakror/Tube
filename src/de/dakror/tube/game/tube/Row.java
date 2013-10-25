@@ -2,6 +2,7 @@ package de.dakror.tube.game.tube;
 
 import static org.lwjgl.opengl.GL11.*;
 
+@Deprecated
 public class Row
 {
 	Field[] fields = new Field[300];
@@ -13,11 +14,13 @@ public class Row
 	 */
 	float angle;
 	
+	@Deprecated
 	public Row(float x, float y)
 	{
 		this(x, y, 0);
 	}
 	
+	@Deprecated
 	public Row(float x, float y, float angle)
 	{
 		this.x = x;
@@ -29,6 +32,7 @@ public class Row
 		}
 	}
 	
+	@Deprecated
 	public void render(boolean active)
 	{
 		if (active) glColor3f(1, 1, 1);

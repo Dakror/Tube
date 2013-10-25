@@ -66,7 +66,7 @@ public class Game
 		
 		tube.render();
 		
-		tube.setActiveRow(tube.getRowCount() - Math.round((camera.getRelativeRotation() - tube.getRowDegree() * 3) / tube.getRowDegree()));
+		tube.setActiveRow(tube.getRowCount() - Math.round((camera.getRelativeRotation() - tube.getRowDegree() * 2.5f) / tube.getRowDegree()));
 		
 		Display.update();
 		Display.sync(60);

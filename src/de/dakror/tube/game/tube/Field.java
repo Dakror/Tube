@@ -10,12 +10,14 @@ public class Field
 	int pos;
 	boolean block;
 	
+	@Deprecated
 	public Field(int pos, boolean block)
 	{
 		this.pos = pos;
 		this.block = block;
 	}
 	
+	@Deprecated
 	public void render()
 	{
 		glTranslatef(0, 0, pos);
