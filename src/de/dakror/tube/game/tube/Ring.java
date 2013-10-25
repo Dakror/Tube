@@ -39,4 +39,17 @@ public class Ring
 	{
 		return new Vector3f[] { vertices[n % vertices.length], vertices[(n + 1) % vertices.length] };
 	}
+	
+	public void setZ(float z)
+	{
+		for (Vector3f v : vertices)
+		{
+			v.setZ(z);
+		}
+	}
+	
+	public float getZ()
+	{
+		return vertices[0].z;
+	}
 }

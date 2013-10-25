@@ -2,6 +2,9 @@ package de.dakror.tube.game.tube;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -13,23 +16,20 @@ import de.dakror.tube.util.RenderAssistant;
  */
 public class Tube
 {
-	// Row[] rows;
 	int activeRow;
 	
 	Vector2f[] verts;
 	Ring[] rings;
 	
-	
 	public Tube(int n)
 	{
 		verts = new Vector2f[n];
 		
-		rings = new Ring[(int) (Game.zFar + 5)];
+		rings = new Ring[(int) (Game.zFar + 25)];
 		
 		float step = 360f / n;
 		float radius = (0.5f * Field.SIZE) / (float) Math.cos(Math.toRadians((180 - step) / 2f)) - 0.08f;
 		
-		// rows = new Row[n];
 		for (int i = 0; i < n; i++)
 		{
 			float degs = step * i;
@@ -39,7 +39,6 @@ public class Tube
 			float y = (float) Math.sin(rads) * radius;
 			
 			verts[i] = new Vector2f(x, y);
-			// rows[i] = new Row(x, y, degs);
 		}
 		
 		for (int i = 0; i < rings.length; i++)
@@ -112,5 +111,25 @@ public class Tube
 	public int getActiveRow()
 	{
 		return activeRow;
+	}
+	
+	public void appendFirstRing()
+	{
+		rings[0].setZ(rings[rings.length - 1].getZ() + 1);
+		
+		Arrays.sort(rings, new Comparator<Ring>()
+		{
+			
+			@Override
+			public int compare(Ring o1, Ring o2)
+			{
+				return Math.round(o1.getZ() - o2.getZ());
+			}
+		});
+	}
+	
+	public Ring getRing(int index)
+	{
+		return rings[index];
 	}
 }

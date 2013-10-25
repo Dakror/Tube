@@ -25,13 +25,13 @@ public class Game
 	public float cameraSpeed = 0.3f;
 	public int cameraRotationSpeed = 180;
 	
-	Tube tube;
+	public Tube tube;
 	
 	public Game()
 	{
-		new UpdateThread();
-		
 		tube = new Tube(12);
+		
+		new UpdateThread();
 	}
 	
 	public void gameLoop()
@@ -52,6 +52,7 @@ public class Game
 		glRotatef(camera.getRelativeRotation(), 0, 0, 1);
 		
 		FloatBuffer fogColor = BufferUtils.createFloatBuffer(4);
+		
 		fogColor.put(new float[] { 0, 0, 0, 1 }).flip();
 		glEnable(GL_FOG);
 		glFogi(GL_FOG_MODE, GL_LINEAR);
