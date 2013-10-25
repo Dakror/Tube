@@ -43,4 +43,13 @@ public class DriverCamera
 	{
 		this.rotation = rotation;
 	}
+	
+	public float getRelativeRotation()
+	{
+		float rot = rotation % 360;
+		
+		if (rot < 0) rot = 360 + rot;
+		
+		return rot;
+	}
 }

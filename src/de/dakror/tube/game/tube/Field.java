@@ -41,7 +41,6 @@ public class Field
 			glEnable(GL_TEXTURE_2D);
 			RenderAssistant.bindTexture("/img/field.png");
 			
-			glColor3f(1, 1, 1);
 			RenderAssistant.renderRect(0, 0, 1, 1, 0, 0, size, size);
 		}
 		

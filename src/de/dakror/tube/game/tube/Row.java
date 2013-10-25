@@ -29,15 +29,18 @@ public class Row
 		}
 	}
 	
-	public void render()
+	public void render(boolean active)
 	{
+		if (active) glColor3f(1, 1, 1);
+		else glColor3f(0.75f, 0.75f, 0.75f);
+		
 		glTranslatef(x + 0.5f, y, 0);
 		glRotatef(angle - 90, 0, 0, 1);
 		glTranslatef(-0.5f, 0, 0);
-		for (int i = 0; i < fields.length; i++)
+		for (Field f : fields)
 		{
 			glPushMatrix();
-			fields[i].render();
+			f.render();
 			glPopMatrix();
 		}
 	}
