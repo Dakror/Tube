@@ -6,34 +6,27 @@ import de.dakror.tube.Tube;
 /**
  * @author Dakror
  */
-public class UpdateThread extends Thread
-{
+public class UpdateThread extends Thread {
 	public static UpdateThread currentUpdateThread;
 	
 	public boolean stopRequested;
 	
-	public UpdateThread()
-	{
+	public UpdateThread() {
 		currentUpdateThread = this;
 		stopRequested = false;
 		start();
 	}
 	
 	@Override
-	public void run()
-	{
-		while (Tube.running)
-		{
+	public void run() {
+		while (Tube.running) {
 			if (stopRequested) break;
 			
 			Game.camera.update();
 			
-			try
-			{
+			try {
 				Thread.sleep(20);
-			}
-			catch (InterruptedException e)
-			{
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

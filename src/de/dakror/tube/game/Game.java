@@ -14,8 +14,7 @@ import de.dakror.tube.util.DriverCamera;
 /**
  * @author Dakror
  */
-public class Game
-{
+public class Game {
 	public static final float zNear = 0.1f;
 	public static final float zFar = 50f;
 	
@@ -27,15 +26,13 @@ public class Game
 	
 	public Tube tube;
 	
-	public Game()
-	{
+	public Game() {
 		tube = new Tube(12);
 		
 		new UpdateThread();
 	}
 	
-	public void gameLoop()
-	{
+	public void gameLoop() {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
@@ -73,8 +70,7 @@ public class Game
 		Display.sync(60);
 	}
 	
-	public static void init()
-	{
+	public static void init() {
 		currentGame = new Game();
 		
 		glMatrixMode(GL_PROJECTION);

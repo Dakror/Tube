@@ -23,26 +23,22 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import de.dakror.tube.settings.CFG;
 
-public class RenderAssistant
-{
+public class RenderAssistant {
 	public static HashMap<String, Texture> textures = new HashMap<>();
 	
-	public static void storeTexture(String path)
-	{
+	public static void storeTexture(String path) {
 		Texture t = loadTexture(path);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		textures.put(path, t);
 	}
 	
-	public static void bindTexture(String path)
-	{
+	public static void bindTexture(String path) {
 		if (path == null) return;
 		
 		Texture t = textures.get(path);
 		if (t != null) t.bind();
-		else
-		{
+		else {
 			t = loadTexture(path);
 			t.bind();
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -51,24 +47,19 @@ public class RenderAssistant
 		}
 	}
 	
-	private static Texture loadTexture(String path)
-	{
-		try
-		{
+	private static Texture loadTexture(String path) {
+		try {
 			Texture texture = TextureLoader.getTexture(".png", RenderAssistant.class.getResourceAsStream(path));
 			improveTexture(texture);
 			return texture;
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			CFG.p(path);
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public static void improveTexture(Texture texture)
-	{
+	public static void improveTexture(Texture texture) {
 		texture.bind();
 		
 		int width = texture.getImageWidth();
@@ -88,18 +79,15 @@ public class RenderAssistant
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, 8);
 	}
 	
-	public static void renderRect(float posX, float posY, float sizeX, float sizeY)
-	{
+	public static void renderRect(float posX, float posY, float sizeX, float sizeY) {
 		renderRect(posX, posY, sizeX, sizeY, 1, 1);
 	}
 	
-	public static void renderRect(float posX, float posY, float sizeX, float sizeY, float texSizeX, float texSizeY)
-	{
+	public static void renderRect(float posX, float posY, float sizeX, float sizeY, float texSizeX, float texSizeY) {
 		renderRect(posX, posY, sizeX, sizeY, 0, 0, texSizeX, texSizeY);
 	}
 	
-	public static void renderRect(float posX, float posY, float sizeX, float sizeY, float texPosX, float texPosY, float texSizeX, float texSizeY)
-	{
+	public static void renderRect(float posX, float posY, float sizeX, float sizeY, float texPosX, float texPosY, float texSizeX, float texSizeY) {
 		glPushMatrix();
 		{
 			glDisable(GL_CULL_FACE);
@@ -123,8 +111,7 @@ public class RenderAssistant
 		glPopMatrix();
 	}
 	
-	public static void renderCuboid(float x, float y, float z, float sizeX, float sizeY, float sizeZ)
-	{
+	public static void renderCuboid(float x, float y, float z, float sizeX, float sizeY, float sizeZ) {
 		glBegin(GL_LINES);
 		{
 			glVertex3f(x, y, z);
@@ -166,8 +153,7 @@ public class RenderAssistant
 		glEnd();
 	}
 	
-	public static void drawRect(float posX, float posY, float sizeX, float sizeY)
-	{
+	public static void drawRect(float posX, float posY, float sizeX, float sizeY) {
 		glPushMatrix();
 		{
 			glDisable(GL_CULL_FACE);
@@ -186,8 +172,7 @@ public class RenderAssistant
 		glPopMatrix();
 	}
 	
-	public static void renderText(float x, float y, String text, Font f)
-	{
+	public static void renderText(float x, float y, String text, Font f) {
 		TextureImpl.bindNone();
 		glEnable(GL_BLEND);
 		FloatBuffer fb = BufferUtils.createFloatBuffer(16);
@@ -196,10 +181,8 @@ public class RenderAssistant
 		glDisable(GL_BLEND);
 	}
 	
-	public static void set2DRenderMode(boolean t)
-	{
-		if (t)
-		{
+	public static void set2DRenderMode(boolean t) {
+		if (t) {
 			glMatrixMode(GL_PROJECTION);
 			glPushMatrix();
 			glLoadIdentity();
@@ -211,45 +194,36 @@ public class RenderAssistant
 			glDisable(GL_TEXTURE_2D);
 			glShadeModel(GL_SMOOTH);
 			glDisable(GL_DEPTH_TEST);
-		}
-		else
-		{
+		} else {
 			glMatrixMode(GL_PROJECTION);
 			glPopMatrix();
 			glMatrixMode(GL_MODELVIEW);
 		}
 	}
 	
-	public static void glColorHex(String hex, float alpha)
-	{
+	public static void glColorHex(String hex, float alpha) {
 		glColor4f(Integer.parseInt(hex.substring(0, 2), 16) / 255f, Integer.parseInt(hex.substring(2, 4), 16) / 255f, Integer.parseInt(hex.substring(4, 6), 16) / 255f, alpha);
 	}
 	
-	public static BufferedImage toBufferedImage(Image img)
-	{
+	public static BufferedImage toBufferedImage(Image img) {
 		BufferedImage image = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		image.getGraphics().drawImage(img, 0, 0, null);
 		
 		return image;
 	}
 	
-	public static String[] wrap(String raw, Font f, int width)
-	{
+	public static String[] wrap(String raw, Font f, int width) {
 		String[] words = raw.split(" ");
 		ArrayList<String> lines = new ArrayList<>();
 		int wordIndex = 0;
 		String line = "";
 		TrueTypeFont ttf = FontAssistant.getFont(f);
 		
-		while (wordIndex < words.length)
-		{
-			if (ttf.getWidth(line + " " + words[wordIndex]) <= width)
-			{
+		while (wordIndex < words.length) {
+			if (ttf.getWidth(line + " " + words[wordIndex]) <= width) {
 				line += " " + words[wordIndex];
 				wordIndex++;
-			}
-			else
-			{
+			} else {
 				
 				lines.add(line);
 				line = "";
@@ -258,8 +232,7 @@ public class RenderAssistant
 		lines.add(line);
 		
 		ArrayList<String> realLines = new ArrayList<>();
-		for (String s : lines)
-		{
+		for (String s : lines) {
 			String[] nls = s.split("\n");
 			for (String nl : nls)
 				realLines.add(nl);
